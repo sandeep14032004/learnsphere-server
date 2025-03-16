@@ -8,7 +8,6 @@ import path from "path";
 
 dotenv.config();
 
-// Ensure the 'uploads' directory exists
 const uploadDir = path.join(path.resolve(), "uploads");
 if (!fs.existsSync(uploadDir)) {
   fs.mkdirSync(uploadDir, { recursive: true });
@@ -17,7 +16,6 @@ if (!fs.existsSync(uploadDir)) {
   console.log("✅ 'uploads' directory already exists.");
 }
 
-// Razorpay instance
 export const instance = new Razorpay({
   key_id: process.env.Razorpay_key,
   key_secret: process.env.Razorpay_Secret,
@@ -34,10 +32,8 @@ app.get("/", (req, res) => {
   res.send("hello");
 });
 
-// Serve static files from the uploads folder
 app.use("/uploads", express.static(uploadDir));
 
-// Import routes
 import userRoutes from "./routes/user.js";
 import courseRoutes from "./routes/course.js";
 import adminRoutes from "./routes/admin.js";
